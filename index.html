@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luis Minvielle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #111111;
+      --white: #ffffff;
+      --gray-100: #f7f7f7;
+      --gray-200: #e8e8e8;
+      --gray-400: #999999;
+      --gray-600: #555555;
+      --max-w: 900px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-weight: 700; font-size: 15px; letter-spacing: 0.04em;
+      text-transform: uppercase; text-decoration: none; color: var(--black);
+    }
+    .nav-credit { font-size: 11px; font-style: italic; color: var(--gray-400); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--gray-600); font-size: 13px;
+      font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--black); }
+
+    /* HERO */
+    .hero {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 80px 24px 72px;
+      display: grid; grid-template-columns: 1fr 240px; gap: 64px; align-items: start;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(42px, 6vw, 64px); font-weight: 700;
+      line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 24px;
+    }
+    .hero-tagline {
+      font-size: 17px; color: var(--gray-600); line-height: 1.65;
+      max-width: 420px; margin-bottom: 36px;
+    }
+    .hero-tagline strong { color: var(--black); font-weight: 600; }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+    .badge {
+      display: inline-block; padding: 6px 14px;
+      border: 1.5px solid var(--black); border-radius: 2px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--black);
+    }
+
+    /* HERO SIDEBAR */
+    .hero-sidebar { display: flex; flex-direction: column; gap: 28px; }
+    .hero-photo-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .hero-photo-wrap img {
+      width: 220px; height: 220px; object-fit: cover;
+      border-radius: 4px; filter: grayscale(15%); display: block;
+    }
+    .hero-photo-caption {
+      font-size: 11px; font-style: italic; color: var(--gray-400);
+      text-align: center; max-width: 200px; line-height: 1.4;
+    }
+
+    /* NOW PLAYING */
+    .now-playing {
+      border: 1.5px solid var(--gray-200); border-radius: 3px;
+      padding: 16px; background: var(--gray-100);
+    }
+    .now-playing-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gray-400); margin-bottom: 12px;
+    }
+    .vinyl-wrap {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 12px;
+    }
+    .vinyl {
+      width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0;
+      position: relative; overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+    .vinyl-art {
+      width: 100%; height: 100%; object-fit: cover;
+      border-radius: 50%;
+    }
+    /* Vinyl record grooves overlay */
+    .vinyl::after {
+      content: '';
+      position: absolute; inset: 0; border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%, transparent 18%, rgba(0,0,0,0.55) 19%, rgba(0,0,0,0.55) 20%, transparent 21%),
+        radial-gradient(circle at 50% 50%, transparent 22%, rgba(0,0,0,0.25) 23%, rgba(0,0,0,0.25) 24%, transparent 25%),
+        radial-gradient(circle at 50% 50%, transparent 26%, rgba(0,0,0,0.2) 27%, rgba(0,0,0,0.2) 28%, transparent 29%),
+        radial-gradient(circle at 50% 50%, transparent 32%, rgba(0,0,0,0.15) 33%, rgba(0,0,0,0.15) 34%, transparent 35%),
+        radial-gradient(circle at 50% 50%, transparent 38%, rgba(0,0,0,0.12) 39%, rgba(0,0,0,0.12) 40%, transparent 41%),
+        radial-gradient(circle at 50% 50%, transparent 44%, rgba(0,0,0,0.1) 45%, rgba(0,0,0,0.1) 46%, transparent 47%);
+    }
+    /* Center label dot */
+    .vinyl::before {
+      content: '';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 14px; height: 14px; border-radius: 50%;
+      background: white; z-index: 1;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
+    }
+    .vinyl-info { flex: 1; min-width: 0; }
+    .vinyl-artist {
+      font-size: 13px; font-weight: 600; color: var(--black);
+      line-height: 1.3; margin-bottom: 2px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .vinyl-album {
+      font-size: 11px; color: var(--gray-400); font-weight: 400;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .now-playing-review {
+      font-size: 12px; font-style: italic; color: var(--gray-600);
+      line-height: 1.5; border-top: 1px solid var(--gray-200); padding-top: 10px;
+    }
+
+    /* DIVIDER */
+    .divider {
+      max-width: var(--max-w); margin: 0 auto 64px;
+      padding: 0 24px; border: none; border-top: 1px solid var(--gray-200);
+    }
+
+    /* SECTION */
+    .section { max-width: var(--max-w); margin: 0 auto 80px; padding: 0 24px; }
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gray-400); margin-bottom: 32px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+
+    /* TAGLINE BANNER */
+    .tagline-banner {
+      border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200);
+      padding: 48px 24px; text-align: center; margin-bottom: 80px;
+    }
+    .tagline-banner p {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 3.5vw, 36px); font-style: italic;
+      color: var(--black); line-height: 1.3;
+    }
+    .tagline-banner em { font-style: normal; font-weight: 700; }
+
+    /* PROJECT CARDS */
+    .cards-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 2px; background: var(--gray-200); border: 1.5px solid var(--gray-200);
+    }
+    .card {
+      background: var(--white); display: flex; flex-direction: column;
+      text-decoration: none; color: inherit; transition: background 0.2s; overflow: hidden;
+    }
+    .card:hover { background: var(--gray-100); }
+
+    /* Card image — 130 px header */
+    .card-img {
+      width: 100%; height: 110px; overflow: hidden;
+      background: var(--gray-100); flex-shrink: 0; display: block;
+    }
+    .card-img svg { width: 100%; height: 100%; display: block; }
+
+    /* Featured (WEF) card spans 2 cols, horizontal layout */
+    .card-featured {
+      grid-column: 1 / -1;
+      flex-direction: row;
+    }
+    .card-featured .card-img {
+      width: 260px; height: auto; min-height: 160px; flex-shrink: 0;
+    }
+
+    .card-body { padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .card-number { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: var(--gray-400); }
+    .card-category { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; line-height: 1.2; color: var(--black); }
+    .card-desc { font-size: 13px; color: var(--gray-600); line-height: 1.7; flex: 1; }
+    .card-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+    .stack-chip {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.05em;
+      padding: 3px 8px; background: var(--gray-100); border: 1px solid var(--gray-200);
+      border-radius: 2px; color: var(--gray-600);
+    }
+    .card-link {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--black); margin-top: 10px;
+      display: inline-flex; align-items: center; gap: 5px;
+      text-decoration: none;
+    }
+    .card-link::after { content: '→'; }
+    .no-link .card-link { display: none; }
+
+    /* MUSIC WRITING */
+    .writing-list {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+      background: var(--gray-200); border: 1.5px solid var(--gray-200);
+    }
+    .writing-item {
+      background: var(--white); padding: 24px 28px;
+      text-decoration: none; color: inherit;
+      transition: background 0.2s; display: flex; flex-direction: column; gap: 6px;
+    }
+    .writing-item:hover { background: var(--gray-100); }
+    .writing-pub { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); }
+    .writing-title { font-size: 15px; font-weight: 500; color: var(--black); line-height: 1.4; }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .contact-intro { font-family: 'Playfair Display', serif; font-size: 28px; font-style: italic; line-height: 1.35; color: var(--black); margin-bottom: 16px; }
+    .contact-sub { font-size: 14px; color: var(--gray-600); line-height: 1.65; }
+    .contact-form { display: flex; flex-direction: column; gap: 14px; }
+    .form-field { display: flex; flex-direction: column; gap: 5px; }
+    .form-field label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); }
+    .form-field input, .form-field textarea {
+      border: 1.5px solid var(--gray-200); border-radius: 2px; padding: 10px 14px;
+      font-family: 'Inter', sans-serif; font-size: 14px; color: var(--black);
+      background: var(--white); outline: none; transition: border-color 0.2s; resize: vertical;
+    }
+    .form-field input:focus, .form-field textarea:focus { border-color: var(--black); }
+    .btn-submit {
+      align-self: flex-start; background: var(--black); color: var(--white);
+      border: none; padding: 12px 28px; font-family: 'Inter', sans-serif;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; border-radius: 2px; transition: opacity 0.2s; margin-top: 4px;
+    }
+    .btn-submit:hover { opacity: 0.75; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--gray-200); padding: 32px 24px; margin-top: 40px; }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .footer-name { font-size: 13px; font-weight: 600; color: var(--black); }
+    .footer-copy { font-size: 12px; color: var(--gray-400); }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      .hero { grid-template-columns: 1fr; padding: 48px 20px 56px; gap: 40px; }
+      .hero-sidebar { order: -1; align-items: center; }
+      .hero-photo-wrap img { width: 140px; height: 140px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .card-featured { flex-direction: column; }
+      .card-featured .card-img { width: 100%; height: 110px; }
+      .writing-list { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-credit { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="#">Luis Minvielle</a>
+      <span class="nav-credit">Trying to make websites lightweight again.</span>
+      <ul class="nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1 class="hero-name">Luis<br/>Minvielle</h1>
+      <p class="hero-tagline">
+        <strong>Music Writer.</strong> Product Marketer. Organic Growth Consultant.
+        Someone who also happens to code.
+      </p>
+      <div class="hero-badges">
+        <span class="badge">Music Writing</span>
+        <span class="badge">Product Marketing</span>
+        <span class="badge">Organic Growth</span>
+        <span class="badge">Engineering</span>
+      </div>
+    </div>
+
+    <div class="hero-sidebar">
+      <!-- Photo -->
+      <div class="hero-photo-wrap">
+        <img src="https://raw.githubusercontent.com/luisminvielle/ai-seo-agency-check/refs/heads/main/luis.jpg" alt="Luis Minvielle" />
+        <p class="hero-photo-caption">Actual headshot. Not an AI-generated picture, I swear.</p>
+      </div>
+
+      <!-- Now Playing — content loaded from now-playing/data.json -->
+      <a class="now-playing" id="now-playing-link" href="#" target="_blank" rel="noopener" style="text-decoration:none;display:block;">
+        <p class="now-playing-label">What I'm listening to</p>
+        <div class="vinyl-wrap">
+          <div class="vinyl">
+            <img class="vinyl-art" id="np-art" src="now-playing/album.jpg" alt="Album artwork" />
+          </div>
+          <div class="vinyl-info">
+            <p class="vinyl-artist" id="np-artist">...</p>
+            <p class="vinyl-album" id="np-album">...</p>
+          </div>
+        </div>
+        <p class="now-playing-review" id="np-review">...</p>
+      </a>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- WORK -->
+  <section class="section" id="work">
+    <p class="section-label">Selected Work</p>
+    <div class="cards-grid">
+
+      <!-- CARD 1: Gerät -->
+      <a class="card" href="https://luisminvielle.github.io/gerat/" target="_blank" rel="noopener">
+        <div class="card-img">
+          <svg viewBox="0 0 440 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g-rainbow" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"   stop-color="#EF4444"/>
+                <stop offset="25%"  stop-color="#EAB308"/>
+                <stop offset="50%"  stop-color="#22C55E"/>
+                <stop offset="75%"  stop-color="#3B82F6"/>
+                <stop offset="100%" stop-color="#A855F7"/>
+              </linearGradient>
+            </defs>
+            <rect width="440" height="110" fill="#f7f7f7"/>
+            <!-- Circuit traces left -->
+            <polyline points="0,54 92,54 92,34 152,34" stroke="#d8d8d8" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="46" cy="54" r="3" fill="#d8d8d8"/>
+            <polyline points="0,70 34,70 34,54" stroke="#d8d8d8" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="34" cy="70" r="3" fill="#d8d8d8"/>
+            <!-- Circuit traces right -->
+            <polyline points="440,54 348,54 348,34 288,34" stroke="#d8d8d8" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="394" cy="54" r="3" fill="#d8d8d8"/>
+            <polyline points="440,70 406,70 406,54" stroke="#d8d8d8" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="406" cy="70" r="3" fill="#d8d8d8"/>
+            <!-- Padlock shackle -->
+            <path d="M 202 40 L 202 23 Q 202 7 220 7 Q 238 7 238 23 L 238 40" stroke="#111111" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Padlock body -->
+            <rect x="188" y="38" width="64" height="50" rx="4" stroke="#111111" stroke-width="2.5" fill="white"/>
+            <!-- Keyhole -->
+            <circle cx="220" cy="58" r="6" stroke="#111111" stroke-width="2.5" fill="none"/>
+            <line x1="220" y1="64" x2="220" y2="75" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Signal rings -->
+            <path d="M 248 58 C 255 52 255 46 248 40" stroke="#111111" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+            <path d="M 258 63 C 269 52 269 44 258 34" stroke="#111111" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.25"/>
+            <!-- GERÄT in rainbow — the Gravity's Rainbow reference -->
+            <text x="220" y="105" font-family="Georgia,'Playfair Display',serif" font-size="11" font-weight="700" fill="url(#g-rainbow)" text-anchor="middle" letter-spacing="5">GERÄT</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="card-number">01</span>
+          <p class="card-category">Engineering</p>
+          <h2 class="card-title">Gerät</h2>
+          <p class="card-desc">A remote-lock IoT system named after Thomas Pynchon's Rocket Device. Built to protect ~30 retail stores across Argentina, it ran for nearly a decade and virtually eliminated theft at every site.</p>
+          <div class="card-stack">
+            <span class="stack-chip">Node.js</span>
+            <span class="stack-chip">Express</span>
+            <span class="stack-chip">Socket.io</span>
+            <span class="stack-chip">MongoDB</span>
+            <span class="stack-chip">Arduino</span>
+            <span class="stack-chip">Bootstrap 4</span>
+            <span class="stack-chip">Chart.js</span>
+            <span class="stack-chip">Heroku</span>
+          </div>
+          <span class="card-link">View project</span>
+        </div>
+      </a>
+
+      <!-- CARD 2: CNN + WBD Branded Content -->
+      <a class="card" href="https://sponsorcontent.cnn.com/es/mastercard/la-uefa-champions-league-llega-a-mexico/" target="_blank" rel="noopener">
+        <div class="card-img">
+          <svg viewBox="0 0 440 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="c2-clip">
+                <rect x="50" y="12" width="200" height="25" rx="3"/>
+              </clipPath>
+            </defs>
+            <rect width="440" height="110" fill="#f7f7f7"/>
+            <!-- Clapperboard body -->
+            <rect x="50" y="35" width="200" height="62" rx="3" stroke="#111111" stroke-width="2.5" fill="white"/>
+            <!-- Body rule lines -->
+            <line x1="68" y1="52" x2="232" y2="52" stroke="#e0e0e0" stroke-width="1.5"/>
+            <line x1="68" y1="65" x2="232" y2="65" stroke="#e0e0e0" stroke-width="1.5"/>
+            <line x1="68" y1="78" x2="232" y2="78" stroke="#e0e0e0" stroke-width="1.5"/>
+            <line x1="68" y1="91" x2="192" y2="91" stroke="#e0e0e0" stroke-width="1.5"/>
+            <!-- Top bar: black fill, white diagonal stripes clipped -->
+            <rect x="50" y="12" width="200" height="25" rx="3" fill="#111111" stroke="#111111" stroke-width="2.5"/>
+            <g clip-path="url(#c2-clip)">
+              <line x1="44"  y1="37" x2="70"  y2="12" stroke="white" stroke-width="9"/>
+              <line x1="68"  y1="37" x2="94"  y2="12" stroke="white" stroke-width="9"/>
+              <line x1="92"  y1="37" x2="118" y2="12" stroke="white" stroke-width="9"/>
+              <line x1="116" y1="37" x2="142" y2="12" stroke="white" stroke-width="9"/>
+              <line x1="140" y1="37" x2="166" y2="12" stroke="white" stroke-width="9"/>
+              <line x1="164" y1="37" x2="190" y2="12" stroke="white" stroke-width="9"/>
+              <line x1="188" y1="37" x2="214" y2="12" stroke="white" stroke-width="9"/>
+              <line x1="212" y1="37" x2="238" y2="12" stroke="white" stroke-width="9"/>
+            </g>
+            <!-- Hinge arms -->
+            <line x1="72"  y1="12" x2="80"  y2="-1" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
+            <line x1="228" y1="12" x2="236" y2="-1" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="80"  cy="-1" r="4" fill="#111111"/>
+            <circle cx="236" cy="-1" r="4" fill="#111111"/>
+            <!-- Separator -->
+            <line x1="306" y1="20" x2="306" y2="90" stroke="#e0e0e0" stroke-width="1"/>
+            <!-- CNN in brand red — the only color -->
+            <text x="373" y="64" font-family="Arial,Helvetica,sans-serif" font-size="36" font-weight="900" fill="#CC0000" text-anchor="middle" letter-spacing="-1">CNN</text>
+            <!-- WBD in dark -->
+            <text x="373" y="87" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" fill="#666666" text-anchor="middle" letter-spacing="1">WBD</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="card-number">02</span>
+          <p class="card-category">Storytelling</p>
+          <h2 class="card-title">Branded Content at Scale</h2>
+          <p class="card-desc">Writing branded stories for Warner Bros. Discovery and CNN since 2021. Editorial voice that holds, commercial goals that land.</p>
+          <div class="card-stack">
+            <span class="stack-chip">Storytelling</span>
+            <span class="stack-chip">Branded Content</span>
+            <span class="stack-chip">Leadership Writing</span>
+          </div>
+          <span class="card-link">See an example</span>
+        </div>
+      </a>
+
+      <!-- CARD 3: The Global Move -->
+      <div class="card">
+        <div class="card-img">
+          <svg viewBox="0 0 440 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="440" height="110" fill="#f7f7f7"/>
+            <!-- Newsletter title — brand identity -->
+            <text x="90" y="14" font-family="Inter,Arial,sans-serif" font-size="8" font-weight="700" fill="#bbbbbb" letter-spacing="2">THE GLOBAL MOVE</text>
+            <!-- Grid lines -->
+            <line x1="88" y1="22"  x2="352" y2="22"  stroke="#ebebeb" stroke-width="1"/>
+            <line x1="88" y1="42"  x2="352" y2="42"  stroke="#ebebeb" stroke-width="1"/>
+            <line x1="88" y1="62"  x2="352" y2="62"  stroke="#ebebeb" stroke-width="1"/>
+            <line x1="88" y1="82"  x2="352" y2="82"  stroke="#ebebeb" stroke-width="1"/>
+            <!-- Baseline -->
+            <line x1="88" y1="92"  x2="352" y2="92"  stroke="#cccccc" stroke-width="1.5"/>
+            <!-- Bars — pure B&W, lightest to darkest -->
+            <rect x="106" y="88"  width="28" height="4"  fill="#e0e0e0" rx="2"/>
+            <rect x="154" y="80"  width="28" height="12" fill="#c0c0c0" rx="2"/>
+            <rect x="202" y="64"  width="28" height="28" fill="#909090" rx="2"/>
+            <rect x="250" y="42"  width="28" height="50" fill="#555555" rx="2"/>
+            <rect x="298" y="18"  width="28" height="74" fill="#111111" rx="2"/>
+            <!-- Arrow above last bar -->
+            <line x1="312" y1="13" x2="312" y2="4"  stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
+            <polyline points="307,9 312,4 317,9" stroke="#111111" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Labels -->
+            <text x="120" y="104" font-family="Inter,sans-serif" font-size="9" fill="#cccccc" text-anchor="middle">0</text>
+            <text x="312" y="104" font-family="Inter,sans-serif" font-size="9"  fill="#111111" text-anchor="middle" font-weight="700">9K</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="card-number">03</span>
+          <p class="card-category">Organic Growth</p>
+          <h2 class="card-title">The Global Move</h2>
+          <p class="card-desc">Took a newsletter from zero to 9,000 subscribers in under a year. Good content, tight SEO, and a community that wanted to share it.</p>
+          <div class="card-stack">
+            <span class="stack-chip">Organic Growth</span>
+            <span class="stack-chip">SEO</span>
+            <span class="stack-chip">Technical SEO</span>
+            <span class="stack-chip">Leadership Writing</span>
+          </div>
+          <a class="card-link" href="https://relocateme.substack.com/" target="_blank" rel="noopener">Subscribe to Andrew Stetsenko's Newsletter</a>
+        </div>
+      </div>
+
+      <!-- CARD 4: SEO / AEO — WeAreDevelopers -->
+      <a class="card" href="https://www.wearedevelopers.com/en/magazine/450/how-many-tech-jobs-worldwide" target="_blank" rel="noopener">
+        <div class="card-img">
+          <svg viewBox="0 0 440 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="440" height="110" fill="#f7f7f7"/>
+            <!-- Search result bars (B&W) -->
+            <rect x="68" y="22" width="195" height="9" rx="2" fill="#e8e8e8"/>
+            <rect x="68" y="38" width="155" height="9" rx="2" fill="#e8e8e8"/>
+            <rect x="68" y="54" width="175" height="9" rx="2" fill="#e8e8e8"/>
+            <rect x="68" y="70" width="130" height="9" rx="2" fill="#e8e8e8"/>
+            <!-- Magnifying glass lens (semi-opaque white over bars) -->
+            <circle cx="192" cy="52" r="38" fill="rgba(247,247,247,0.95)"/>
+            <!-- #1 inside lens — B&W -->
+            <text x="192" y="64" font-family="Georgia,'Playfair Display',serif" font-size="30" font-weight="700" fill="#111111" text-anchor="middle">#1</text>
+            <!-- Glass ring -->
+            <circle cx="192" cy="52" r="38" stroke="#111111" stroke-width="4" fill="none"/>
+            <!-- Handle -->
+            <line x1="220" y1="80" x2="246" y2="100" stroke="#111111" stroke-width="6" stroke-linecap="round"/>
+            <!-- Separator -->
+            <line x1="296" y1="20" x2="296" y2="90" stroke="#e0e0e0" stroke-width="1"/>
+            <!-- WE ARE DEVELOPERS in brand blue — the only color -->
+            <text x="368" y="46" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="900" fill="#1d4ed8" text-anchor="middle" letter-spacing="0.5">WE ARE</text>
+            <text x="368" y="63" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="900" fill="#1d4ed8" text-anchor="middle" letter-spacing="0.5">DEVELOPERS</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="card-number">04</span>
+          <p class="card-category">SEO / AEO</p>
+          <h2 class="card-title">150+ Posts. 500% Traffic.</h2>
+          <p class="card-desc">Wrote SEO and AEO content for Europe's largest developer community: React, Node.js, LLMs, open-source, cloud. Traffic grew 500% in six months. Posts ranked #1 for competitive keywords and doubled as top-of-funnel assets at conferences.</p>
+          <div class="card-stack">
+            <span class="stack-chip">SEO</span>
+            <span class="stack-chip">AEO</span>
+            <span class="stack-chip">Technical SEO</span>
+            <span class="stack-chip">Organic Growth</span>
+          </div>
+          <span class="card-link">See an article</span>
+        </div>
+      </a>
+
+      <!-- CARD 5: World Economic Forum — featured full-width -->
+      <a class="card card-featured" href="https://weforum.org/agenda/authors/luis-minvielle" target="_blank" rel="noopener">
+        <div class="card-img">
+          <svg viewBox="0 0 260 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="260" height="200" fill="#f7f7f7"/>
+            <!-- Globe — B&W line art -->
+            <circle cx="130" cy="95" r="62" stroke="#333333" stroke-width="2.5" fill="none"/>
+            <!-- Latitude lines -->
+            <ellipse cx="130" cy="95" rx="62" ry="15" stroke="#888888" stroke-width="1.5" fill="none"/>
+            <ellipse cx="130" cy="70" rx="50" ry="11" stroke="#bbbbbb" stroke-width="1.2" fill="none"/>
+            <ellipse cx="130" cy="120" rx="50" ry="11" stroke="#bbbbbb" stroke-width="1.2" fill="none"/>
+            <!-- Longitude lines -->
+            <ellipse cx="130" cy="95" rx="18" ry="62" stroke="#888888" stroke-width="1.5" fill="none"/>
+            <ellipse cx="130" cy="95" rx="44" ry="62" stroke="#bbbbbb" stroke-width="1.2" fill="none"/>
+            <!-- WORLD ECONOMIC FORUM in WEF blue — the only color -->
+            <text x="130" y="174" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="700" fill="#0284c7" text-anchor="middle" letter-spacing="2">WORLD ECONOMIC FORUM</text>
+            <!-- Year -->
+            <text x="130" y="186" font-family="Arial,Helvetica,sans-serif" font-size="8" fill="#0284c7" text-anchor="middle" letter-spacing="1" opacity="0.7">2022</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="card-number">05</span>
+          <p class="card-category">Editorial</p>
+          <h2 class="card-title">World Economic Forum Agenda</h2>
+          <p class="card-desc">Edited and wrote articles for the World Economic Forum's Agenda platform in 2022, covering global technology trends and economic policy for one of the world's top public forums.</p>
+          <div class="card-stack">
+            <span class="stack-chip">Editing</span>
+            <span class="stack-chip">Leadership Writing</span>
+            <span class="stack-chip">Policy</span>
+            <span class="stack-chip">Tech Journalism</span>
+          </div>
+          <span class="card-link">See author page</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- TAGLINE BANNER -->
+  <div class="tagline-banner">
+    <p>Storytelling that makes your brand <em>(and revenue)</em> grow.</p>
+  </div>
+
+  <!-- WRITING -->
+  <section class="section" id="writing">
+    <p class="section-label">Music Writing</p>
+    <div class="writing-list">
+
+      <a class="writing-item" href="https://daily.bandcamp.com/lists/south-american-surf-rock-list" target="_blank" rel="noopener">
+        <span class="writing-pub">Bandcamp Daily</span>
+        <span class="writing-title">The South American Surf Rock Scene You Should Know</span>
+      </a>
+
+      <a class="writing-item" href="https://daily.bandcamp.com/scene-report/exploring-neo-soul-in-argentina" target="_blank" rel="noopener">
+        <span class="writing-pub">Bandcamp Daily</span>
+        <span class="writing-title">Exploring Neo-Soul in Argentina</span>
+      </a>
+
+      <a class="writing-item" href="https://pitchfork.com/reviews/tracks/ralphie-choo-bulerias-de-un-caballo-malo/" target="_blank" rel="noopener">
+        <span class="writing-pub">Pitchfork</span>
+        <span class="writing-title">Ralphie Choo: "Bulerías de un Caballo Malo"</span>
+      </a>
+
+      <a class="writing-item" href="https://www.okayplayer.com/dangelos-masterpiece-voodoo-laid-out-the-blueprint-for-a-new-masculinity/432882" target="_blank" rel="noopener">
+        <span class="writing-pub">Okayplayer</span>
+        <span class="writing-title">D'Angelo's Voodoo Laid Out the Blueprint for a New Masculinity</span>
+      </a>
+
+      <a class="writing-item" href="https://readrange.com/modest-mouse-golden-casket-interview/" target="_blank" rel="noopener">
+        <span class="writing-pub">Read Range</span>
+        <span class="writing-title">Modest Mouse on Golden Casket</span>
+      </a>
+
+      <a class="writing-item" href="https://beatroutemedia.com/frank-ocean-nostalgia-ultra/" target="_blank" rel="noopener">
+        <span class="writing-pub">Beat Route</span>
+        <span class="writing-title">Frank Ocean: Nostalgia, Ultra</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <p class="section-label">Get in Touch</p>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-intro">"Let's work on something worth writing about."</p>
+        <p class="contact-sub">Whether you're working on marketing, scaling something, building a product, or just want to talk music, feel free to reach out.</p>
+      </div>
+      <form class="contact-form" action="https://formspree.io/f/xaqpleel" method="POST">
+        <div class="form-field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required />
+        </div>
+        <div class="form-field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" placeholder="What's on your mind?" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-name">Luis Minvielle</span>
+      <span class="footer-copy">Music Writer · Product Marketer · Growth Consultant · Builder</span>
+    </div>
+  </footer>
+
+  <script>
+    fetch('now-playing/data.json')
+      .then(r => r.json())
+      .then(d => {
+        document.getElementById('np-artist').textContent = d.artist;
+        // Format: *Album* (Year) with italic album title
+        var year = d.year ? ' (' + d.year + ')' : '';
+        document.getElementById('np-album').innerHTML = '<em>' + d.album + '</em>' + year;
+        document.getElementById('np-review').textContent = d.review;
+        document.getElementById('np-art').src            = d.art || 'now-playing/album.jpg';
+        document.getElementById('now-playing-link').href = d.link || '#';
+      })
+      .catch(() => {
+        // graceful fallback if JSON is missing or fetch is blocked locally
+        document.getElementById('np-artist').textContent = 'Check back soon';
+        document.getElementById('np-album').textContent  = '';
+        document.getElementById('np-review').textContent = '';
+      });
+  </script>
+</body>
+</html>
