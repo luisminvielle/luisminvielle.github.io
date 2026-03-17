@@ -57,7 +57,7 @@
     /* HERO */
     .hero {
       max-width: var(--max-w); margin: 0 auto;
-      padding: 80px 24px 72px;
+      padding: 80px 24px 40px;
       display: grid; grid-template-columns: 1fr 240px; gap: 64px; align-items: start;
     }
     .hero-name {
@@ -114,11 +114,10 @@
     .vinyl-artist {
       font-size: 13px; font-weight: 600; color: var(--black);
       line-height: 1.3; margin-bottom: 2px;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .vinyl-album {
       font-size: 11px; color: var(--gray-400); font-weight: 400;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      line-height: 1.4;
     }
     .now-playing-review {
       font-size: 12px; font-style: italic; color: var(--gray-600);
@@ -127,7 +126,7 @@
 
     /* DIVIDER */
     .divider {
-      max-width: var(--max-w); margin: 0 auto 64px;
+      max-width: var(--max-w); margin: 0 auto 32px;
       padding: 0 24px; border: none; border-top: 1px solid var(--gray-200);
     }
 
@@ -239,6 +238,12 @@
     .footer-inner { max-width: var(--max-w); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
     .footer-name { font-size: 13px; font-weight: 600; color: var(--black); }
     .footer-copy { font-size: 12px; color: var(--gray-400); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a {
+      font-size: 12px; color: var(--gray-400); text-decoration: none;
+      font-weight: 500; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--black); }
 
     /* RESPONSIVE */
     @media (max-width: 700px) {
@@ -283,6 +288,8 @@
         <span class="badge">Product Marketing</span>
         <span class="badge">Organic Growth</span>
         <span class="badge">Engineering</span>
+        <span class="badge">Branded Content</span>
+        <span class="badge">Technical Writing</span>
       </div>
     </div>
 
@@ -513,28 +520,77 @@
         </div>
       </a>
 
-      <!-- CARD 5: World Economic Forum — featured full-width -->
-      <a class="card card-featured" href="https://weforum.org/agenda/authors/luis-minvielle" target="_blank" rel="noopener">
+      <!-- CARD 5: Pear Protocol -->
+      <a class="card" href="https://luisminvielle.github.io/p2p-seeding-guide-lm/" target="_blank" rel="noopener">
         <div class="card-img">
-          <svg viewBox="0 0 260 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="260" height="200" fill="#f7f7f7"/>
-            <!-- Globe — B&W line art -->
-            <circle cx="130" cy="95" r="62" stroke="#333333" stroke-width="2.5" fill="none"/>
-            <!-- Latitude lines -->
-            <ellipse cx="130" cy="95" rx="62" ry="15" stroke="#888888" stroke-width="1.5" fill="none"/>
-            <ellipse cx="130" cy="70" rx="50" ry="11" stroke="#bbbbbb" stroke-width="1.2" fill="none"/>
-            <ellipse cx="130" cy="120" rx="50" ry="11" stroke="#bbbbbb" stroke-width="1.2" fill="none"/>
-            <!-- Longitude lines -->
-            <ellipse cx="130" cy="95" rx="18" ry="62" stroke="#888888" stroke-width="1.5" fill="none"/>
-            <ellipse cx="130" cy="95" rx="44" ry="62" stroke="#bbbbbb" stroke-width="1.2" fill="none"/>
-            <!-- WORLD ECONOMIC FORUM in WEF blue — the only color -->
-            <text x="130" y="174" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="700" fill="#0284c7" text-anchor="middle" letter-spacing="2">WORLD ECONOMIC FORUM</text>
-            <!-- Year -->
-            <text x="130" y="186" font-family="Arial,Helvetica,sans-serif" font-size="8" fill="#0284c7" text-anchor="middle" letter-spacing="1" opacity="0.7">2022</text>
+          <svg viewBox="0 0 440 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="440" height="110" fill="#f7f7f7"/>
+            <!-- Network nodes — B&W texture -->
+            <circle cx="30"  cy="20" r="2.5" fill="#e0e0e0"/>
+            <circle cx="72"  cy="12" r="2.5" fill="#e0e0e0"/>
+            <circle cx="30"  cy="88" r="2.5" fill="#e0e0e0"/>
+            <circle cx="72"  cy="96" r="2.5" fill="#e0e0e0"/>
+            <circle cx="200" cy="14" r="2.5" fill="#e0e0e0"/>
+            <circle cx="240" cy="96" r="2.5" fill="#e0e0e0"/>
+            <line x1="30"  y1="20" x2="72"  y2="12" stroke="#e8e8e8" stroke-width="1"/>
+            <line x1="30"  y1="88" x2="72"  y2="96" stroke="#e8e8e8" stroke-width="1"/>
+            <line x1="72"  y1="12" x2="200" y2="14" stroke="#e8e8e8" stroke-width="1"/>
+            <line x1="72"  y1="96" x2="240" y2="96" stroke="#e8e8e8" stroke-width="1"/>
+            <line x1="30"  y1="20" x2="30"  y2="88" stroke="#e8e8e8" stroke-width="1"/>
+            <!-- Pear body — B&W line art, centered left of separator -->
+            <path d="M 148 8 C 158 8 168 17 166 30 C 176 37 183 51 181 66 C 178 82 166 91 148 91 C 130 91 118 82 115 66 C 113 51 120 37 130 30 C 128 17 138 8 148 8 Z" stroke="#111111" stroke-width="2.5" fill="white"/>
+            <!-- Stem -->
+            <line x1="148" y1="8" x2="150" y2="1" stroke="#111111" stroke-width="2" stroke-linecap="round"/>
+            <!-- Leaf -->
+            <path d="M 150 3 C 158 -2 165 4 159 11" stroke="#111111" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <!-- Separator -->
+            <line x1="296" y1="20" x2="296" y2="90" stroke="#e0e0e0" stroke-width="1"/>
+            <!-- PEAR in brand green — the only color -->
+            <text x="368" y="56" font-family="Arial,Helvetica,sans-serif" font-size="28" font-weight="900" fill="#22c55e" text-anchor="middle" letter-spacing="4">PEAR</text>
+            <!-- PROTOCOL in gray -->
+            <text x="368" y="74" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="700" fill="#aaaaaa" text-anchor="middle" letter-spacing="3">PROTOCOL</text>
           </svg>
         </div>
         <div class="card-body">
           <span class="card-number">05</span>
+          <p class="card-category">Technical Writing</p>
+          <h2 class="card-title">From Protocol to Prose</h2>
+          <p class="card-desc">Pear Protocol is a decentralized trading layer for executing and managing pair trades across DeFi, backed by Tether. Wrote technical guides that translate complex protocol mechanics into content that drives adoption.</p>
+          <div class="card-stack">
+            <span class="stack-chip">Technical Writing</span>
+            <span class="stack-chip">DeFi</span>
+            <span class="stack-chip">Developer Docs</span>
+            <span class="stack-chip">Tether</span>
+          </div>
+          <span class="card-link">Read technical guide on seeding with p2p</span>
+        </div>
+      </a>
+
+      <!-- CARD 6: World Economic Forum -->
+      <a class="card" href="https://weforum.org/agenda/authors/luis-minvielle" target="_blank" rel="noopener">
+        <div class="card-img">
+          <svg viewBox="0 0 440 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="440" height="110" fill="#f7f7f7"/>
+            <!-- Globe — B&W line art, centered left of separator -->
+            <circle cx="148" cy="55" r="42" stroke="#333333" stroke-width="2" fill="none"/>
+            <!-- Latitude lines -->
+            <ellipse cx="148" cy="55" rx="42" ry="10" stroke="#888888" stroke-width="1.2" fill="none"/>
+            <ellipse cx="148" cy="37" rx="33"  ry="7"  stroke="#bbbbbb" stroke-width="1"   fill="none"/>
+            <ellipse cx="148" cy="73" rx="33"  ry="7"  stroke="#bbbbbb" stroke-width="1"   fill="none"/>
+            <!-- Longitude lines -->
+            <ellipse cx="148" cy="55" rx="13" ry="42" stroke="#888888" stroke-width="1.2" fill="none"/>
+            <ellipse cx="148" cy="55" rx="30" ry="42" stroke="#bbbbbb" stroke-width="1"   fill="none"/>
+            <!-- Separator -->
+            <line x1="296" y1="20" x2="296" y2="90" stroke="#e0e0e0" stroke-width="1"/>
+            <!-- WORLD ECONOMIC FORUM in WEF blue — the only color -->
+            <text x="368" y="43" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="700" fill="#0284c7" text-anchor="middle" letter-spacing="1.5">WORLD</text>
+            <text x="368" y="58" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="700" fill="#0284c7" text-anchor="middle" letter-spacing="1.5">ECONOMIC</text>
+            <text x="368" y="73" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="700" fill="#0284c7" text-anchor="middle" letter-spacing="1.5">FORUM</text>
+            <text x="368" y="88" font-family="Arial,Helvetica,sans-serif" font-size="9"  fill="#0284c7" text-anchor="middle" letter-spacing="1" opacity="0.6">2022</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="card-number">06</span>
           <p class="card-category">Editorial</p>
           <h2 class="card-title">World Economic Forum Agenda</h2>
           <p class="card-desc">Edited and wrote articles for the World Economic Forum's Agenda platform in 2022, covering global technology trends and economic policy for one of the world's top public forums.</p>
@@ -624,7 +680,11 @@
   <footer>
     <div class="footer-inner">
       <span class="footer-name">Luis Minvielle</span>
-      <span class="footer-copy">Music Writer · Product Marketer · Growth Consultant · Builder</span>
+      <nav class="footer-links">
+        <a href="https://www.linkedin.com/in/luisminv/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/luisminvielle" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://daily.bandcamp.com/contributors/luis-minvielle" target="_blank" rel="noopener">Bandcamp Daily</a>
+      </nav>
     </div>
   </footer>
 
